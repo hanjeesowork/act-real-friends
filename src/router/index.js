@@ -6,6 +6,7 @@ import FriendsList from '@/components/FriendsList'
 Vue.use(Router)
 
 export default new Router({
+  mode: "history",
   routes: [
     {
       path: '/',

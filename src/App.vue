@@ -13,17 +13,17 @@
 <style>
   @font-face {
     font-family: 'NanumSquareRoundR';
-    src: url('assets/NanumSquareRoundR.ttf') format('truetype');
+    src: url('assets/NanumSquareRoundR.eot') format('truetype');
   }
 
   @font-face {
     font-family: 'NanumSquareRoundEB';
-    src: url('assets/NanumSquareRoundEB.ttf') format('truetype');
+    src: url('assets/NanumSquareRoundEB.eot') format('truetype');
   }
 
   @font-face {
     font-family: 'NanumGothicR';
-    src: url('assets/NanumGothic-Regular.ttf') format('truetype');
+    src: url('assets/NanumGothic-Regular.eot') format('truetype');
   }
 
   #app {
