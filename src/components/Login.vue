@@ -5,12 +5,12 @@
         ACT HR
       </header>
       <section>
-        <input placeholder="이름"/>
+        <input id="id" placeholder="이름"/>
       </section>
       <section>
-        <input placeholder="비밀번호"/>
+        <input type="password" id="password" placeholder="비밀번호"/>
       </section>
-      <button>
+      <button @click="login">
         로그인
       </button>
     </article>
@@ -18,8 +18,27 @@
 </template>
 
 <script>
+  import firebase from 'firebase'
+
   export default {
-    name: "login"
+    name: "login",
+
+    methods: {
+      login() {
+        firebase.auth().signInWithEmailAndPassword(document.getElementById('id').value, document.getElementById('password').value)
+          .then((result) => {
+            this.$router.push('/friendsList')
+          })
+          .catch((reject) => {
+            alert(reject.message)
+          })
+      }
+    },
+
+
+    mounted() {
+
+    }
   }
 </script>
 

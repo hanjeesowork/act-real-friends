@@ -3,14 +3,21 @@
     <header>
       평가자
     </header>
-    <input placeholder="이름"/>
-    <input placeholder="소속부서"/>
+    <template v-if="approved">
+      <input placeholder="이름" v-model="user.name" readonly/>
+      <input placeholder="소속부서" v-model="user.department" readonly/>
+    </template>
+    <template v-else>
+      <input placeholder="이름" v-model="user.name"/>
+      <input placeholder="소속부서" v-model="user.department"/>
+    </template>
   </article>
 </template>
 
 <script>
   export default {
-    name: "name-card"
+    name: "name-card",
+    props: ['user', 'approved']
   }
 </script>
 

@@ -1,17 +1,18 @@
 <template>
   <main>
     <header>
-      Conan
+      {{name}}
     </header>
+    <div>{{this.comment}}</div>
     <section>
-      <header>
-        최소 5명의 평가자를 입력해 주세요.
-      </header>
-      <name-card v-for="(index) in count" :key="index"></name-card>
-      <img @click="addPerson" src="@/assets/add-person.png"/>
+      <header id="notice"></header>
+      <name-card v-for="(user, index) in list" :key='index' :user="user" :approved="approved">
+        <button v-show="!approved" style="line-height: 10px;" @click="killMe(index)" >X</button>
+      </name-card>
+      <img v-show="!approved" @click="addPerson" src="@/assets/add-person.png"/>
     </section>
     <footer>
-      <button>
+      <button v-show="!approved" class="saveButton" @click="saveFriendsList">
         저장
       </button>
     </footer>
@@ -20,6 +21,7 @@
 
 <script>
   import nameCard from '@/components/NameCard.vue'
+  import firebase from 'firebase'
 
   export default {
     name: "name-list",
@@ -27,15 +29,73 @@
 
     data: function () {
       return {
-        count: 5
+        uid: '',
+        name: '',
+        list: [],
+        approved: true,
+        comment: ''
       }
     },
 
     methods: {
+      readData() {
+        const _this = this
+
+        firebase.auth().onAuthStateChanged(function (user) {
+          if (user) {
+            _this.uid = user.uid
+            var userData = firebase.database().ref(_this.uid);
+
+            userData.on('value', function (snapshot) {
+              _this.name = snapshot.val().name
+              _this.list = Object.values(snapshot.val().friends ? snapshot.val().friends : {})
+              _this.approved = snapshot.val().approved
+
+              if(_this.list.length < 5) {
+                while(_this.list.length < 5) {
+                  _this.list.push({name: '', department: ''})
+                }
+              }
+
+              if(_this.approved) {
+                document.getElementById('notice').innerText = '아래의 목록으로 평가가 진행됩니다.'
+              } else {
+                document.getElementById('notice').innerText = '최소 5명의 평가자를 입력해 주세요.'
+                _this.comment = snapshot.val().comment
+              }
+            });
+          } else {
+            console.log("login error")
+          }
+        })
+      },
+
+
       addPerson() {
-        this.count = this.count + 1
+        this.list.push({name: '', department: ''})
+      },
+
+
+      saveFriendsList() {
+        const _this = this
+        const nonEmptyList = this.list.filter((person) => {return person.name})
+        var updates = {}
+        updates['/friends'] = nonEmptyList
+
+        firebase.database().ref(this.uid).update(updates).then(function() {
+          _this.readData()
+        })
+      },
+
+      killMe(selectedIndex) {
+        this.list = this.list.filter((value, index) => index !== selectedIndex)
       }
+    },
+
+    beforeMount() {
+      this.readData()
     }
+
   }
 </script>
 
@@ -84,9 +144,10 @@
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
     margin: auto;
+    min-height: 66px;
   }
 
-  button {
+  .saveButton {
     width: 80px;
     height: 32px;
     border-radius: 20px;
@@ -95,7 +156,7 @@
     line-height: 32px;
     color: #ffffff;
     border: 0;
-    margin-top : 16px;
+    margin-top: 16px;
     margin-left: 240px;
     margin-bottom: 18px;
   }
