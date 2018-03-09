@@ -2,6 +2,7 @@
   <article>
     <header>
       평가자
+      <slot></slot>
     </header>
     <template v-if="approved">
       <input placeholder="이름" v-model="user.name" readonly/>
@@ -55,6 +56,8 @@
   input::placeholder {
     color: #b2b2b2;
     font-size: 16px;
+    font-weight: 400;
+
   }
 
 </style>

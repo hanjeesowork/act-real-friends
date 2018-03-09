@@ -4,8 +4,10 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import firebase from 'firebase'
+import ToggleButton from 'vue-js-toggle-button'
 
 Vue.config.productionTip = false
+Vue.use(ToggleButton)
 
 var config = {
   apiKey: "AIzaSyD5VdD-Sv9Hc4xeCsCeJsvnIucRpaKgnVA",

@@ -104,7 +104,8 @@
   main {
     background: url("../assets/namelist-background.png");
     background-size: contain;
-    height: 100vh;
+    min-height: calc(100vh - 10px);
+    padding-bottom: 10px;
   }
 
   main > header {
@@ -138,6 +139,16 @@
     padding-left: 17px;
   }
 
+  div {
+    background: white;
+    width: 320px;
+    margin: auto;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    padding : 10px;
+    border : 1px solid lightgray;
+
+  }
   footer {
     background: #ffffff;
     width: 340px;

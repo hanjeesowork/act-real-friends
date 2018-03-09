@@ -25,9 +25,16 @@
 
     methods: {
       login() {
-        firebase.auth().signInWithEmailAndPassword(document.getElementById('id').value, document.getElementById('password').value)
+        const id = document.getElementById('id').value
+        const password = document.getElementById('password').value
+
+        firebase.auth().signInWithEmailAndPassword(id, password)
           .then((result) => {
-            this.$router.push('/friendsList')
+            if (id === 'hanjee.so@gmail.com') {
+              this.$router.push('/admin')
+            } else {
+              this.$router.push('/friendsList')
+            }
           })
           .catch((reject) => {
             alert(reject.message)
@@ -94,6 +101,7 @@
     margin-top: 12px;
     border: 0;
     float: right;
+    padding-bottom: 1px;
   }
 
 </style>
