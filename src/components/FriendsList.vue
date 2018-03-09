@@ -3,11 +3,11 @@
     <header>
       {{name}}
     </header>
-    <div>{{this.comment}}</div>
+    <div v-show="!approved&&comment">{{this.comment}}</div>
     <section>
       <header id="notice"></header>
       <name-card v-for="(user, index) in list" :key='index' :user="user" :approved="approved">
-        <button v-show="!approved" style="line-height: 10px;" @click="killMe(index)" >X</button>
+        <label v-show="!approved" style="line-height: 10px; color: red; margin-left: 20px;" @click="killMe(index)">삭제</label>
       </name-card>
       <img v-show="!approved" @click="addPerson" src="@/assets/add-person.png"/>
     </section>

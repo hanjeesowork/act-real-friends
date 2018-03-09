@@ -8,13 +8,13 @@
     <tbody>
     <tr v-for="(user, uid) in users">
       <td>{{user.name}}</td>
-      <td v-for="friend in friends(user.friends)">{{friend.name}} / {{friend.department}}</td>
+      <td v-for="friend in friends(user.friends)">{{friend.name}} - {{friend.department}}</td>
       <td>
         <toggle-button @change="approveToggle(uid, $event)" :value="user.approved" color="#82C7EB" :sync="true"
                        :labels="{checked: '승인됨', unchecked: '승인필요'}" :width="75" :height="30"></toggle-button>
       </td>
       <td>
-        <button class="comment-button" @click="editComment(uid, user.comment)">수정</button>
+        <img src="../assets/edit-button.png" class="comment-button" @click="editComment(uid, user.comment)"></img>
         {{user.comment}}
       </td>
     </tr>
@@ -115,13 +115,13 @@
   }
 
   table {
-    border: 2px solid #42b983;
+    border: 0;
     border-radius: 3px;
     background-color: #fff;
   }
 
   th {
-    background-color: #42b983;
+    background-color: #58A0C9;
     color: rgba(255, 255, 255, 0.66);
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -130,7 +130,7 @@
   }
 
   tbody > tr {
-    background-color: #f9f9f9;
+    background-color: #F7F7F7;
   }
 
   th, td {
@@ -139,11 +139,11 @@
   }
 
   tbody > tr:hover {
-    background-color: yellow;
+    background-color: #E1E1E1;
   }
 
-  .comment-button {
-    margin-right: 10px;
+  img {
+    padding-right : 10px;
   }
 
   .comment-area {
@@ -156,8 +156,9 @@
     height: 30%;
   }
 
-  .comment-text {
+  textarea {
     width: 100%;
+    font-size : 16px;
   }
 
 </style>

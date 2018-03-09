@@ -8,7 +8,7 @@
         <input id="id" placeholder="이름"/>
       </section>
       <section>
-        <input type="password" id="password" placeholder="비밀번호"/>
+        <input @keyup.enter="login"  type="password" id="password" placeholder="비밀번호"/>
       </section>
       <button @click="login">
         로그인
@@ -22,6 +22,11 @@
 
   export default {
     name: "login",
+    data() {
+      return {
+        adminId: 'hanjee.so@gmail.com'
+      }
+    },
 
     methods: {
       login() {
@@ -30,7 +35,7 @@
 
         firebase.auth().signInWithEmailAndPassword(id, password)
           .then((result) => {
-            if (id === 'hanjee.so@gmail.com') {
+            if (id === this.adminId) {
               this.$router.push('/admin')
             } else {
               this.$router.push('/friendsList')
