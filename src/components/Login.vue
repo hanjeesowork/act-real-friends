@@ -2,7 +2,7 @@
   <main>
     <article>
       <header>
-        ACT HR
+        Real Friends
       </header>
       <section>
         <input id="id" placeholder="이름"/>
@@ -68,7 +68,6 @@
   }
 
   header {
-    font-family: NanumSquareRoundEB;
     font-size: 36px;
     line-height: 1.33;
     color: #ffffff;
@@ -87,6 +86,7 @@
     background: 0;
     font-size: 18px;
     color: #ffffff;
+    border-radius: 0;
   }
 
   section > input::placeholder {
