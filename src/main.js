@@ -5,9 +5,11 @@ import App from './App'
 import router from './router'
 import firebase from 'firebase'
 import ToggleButton from 'vue-js-toggle-button'
+import Toasted from 'vue-toasted';
 
 Vue.config.productionTip = false
 Vue.use(ToggleButton)
+Vue.use(Toasted, {position: 'bottom-center', duration: 1000})
 
 var config = {
   apiKey: "AIzaSyD5VdD-Sv9Hc4xeCsCeJsvnIucRpaKgnVA",

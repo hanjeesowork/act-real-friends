@@ -84,6 +84,8 @@
 
         firebase.database().ref(this.uid).update(updates).then(function() {
           _this.readData()
+
+          _this.$toasted.show('저장했따따따따');
         })
       },
 
@@ -111,7 +113,6 @@
   main > header {
     width: 229.6px;
     height: 32px;
-    font-family: NanumSquareRoundR;
     font-size: 28px;
     font-weight: bold;
     line-height: 1.14;
